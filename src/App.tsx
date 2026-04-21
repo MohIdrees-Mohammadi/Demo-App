@@ -17,11 +17,14 @@ import Dashboard from "./pages/admin/Dashboard";
 import AdminNews from "./pages/admin/AdminNews";
 import AdminServices from "./pages/admin/AdminServices";
 import AdminWhatWeDo from "./pages/admin/AdminWhatWeDo";
+import AdminTheme from "./pages/admin/AdminTheme";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+    <ThemeProvider>
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -40,10 +43,12 @@ const App = () => (
           <Route path="/admin/news" element={<AdminNews />} />
           <Route path="/admin/services" element={<AdminServices />} />
           <Route path="/admin/what-we-do" element={<AdminWhatWeDo />} />
+          <Route path="/admin/theme" element={<AdminTheme />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

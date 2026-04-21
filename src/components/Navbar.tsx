@@ -63,20 +63,22 @@ const Navbar = () => {
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-md shadow-lg" : "bg-background shadow-sm"
+        scrolled
+          ? "bg-background/90 backdrop-blur-lg shadow-md border-b border-border/60"
+          : "bg-background/80 backdrop-blur-sm"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto flex items-center justify-between py-2.5 sm:py-3 md:py-4 px-4">
-        <Link to="/" className="flex items-center gap-2 shrink-0">
+      <div className={`container mx-auto flex items-center justify-between px-4 transition-all duration-300 ${scrolled ? "py-2 md:py-2.5" : "py-3 md:py-4"}`}>
+        <Link to="/" className="flex items-center gap-2 shrink-0 group">
           <div className="flex flex-col">
             <span className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-secondary leading-tight">
               <span className="text-primary">A</span>cero
               <span className="text-primary">E</span>ngineering
             </span>
-            <span className="text-[9px] sm:text-[10px] md:text-xs tracking-[3px] sm:tracking-[4px] uppercase text-steel">LLC</span>
+            <span className="text-[9px] sm:text-[10px] md:text-xs tracking-[3px] sm:tracking-[4px] uppercase text-steel group-hover:text-primary transition-colors">LLC</span>
           </div>
         </Link>
 
@@ -91,10 +93,11 @@ const Navbar = () => {
             >
               <Link
                 to={item.href}
-                className={`nav-link flex items-center gap-1 ${isActive(item.href) ? "text-primary" : ""}`}
+                className={`nav-link flex items-center gap-1 py-2 ${isActive(item.href) ? "text-primary" : ""}`}
               >
                 {item.label}
                 {item.children && <ChevronDown className="w-3 h-3 transition-transform group-hover:rotate-180" />}
+                <span className={`absolute left-0 right-0 -bottom-0.5 h-0.5 bg-primary origin-left transition-transform duration-300 ${isActive(item.href) ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`} />
               </Link>
               <AnimatePresence>
                 {item.children && openDropdown === item.label && (

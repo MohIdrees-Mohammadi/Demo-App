@@ -1,17 +1,26 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { MapPin, Mail, CalendarDays } from "lucide-react";
+import { MapPin, Mail, CalendarDays, ArrowRight } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import footerEngineer from "@/assets/footer-engineer.jpg";
 import logoSds2 from "@/assets/logo-sds2.png";
 import logoTekla from "@/assets/logo-tekla.png";
 import logoAutocad from "@/assets/logo-autocad.png";
+import news1 from "@/assets/news-1.jpg";
+import news2 from "@/assets/news-2.jpg";
+import news3 from "@/assets/news-3.jpg";
+
+const newsFallback: Record<string, string> = {
+  "structural-steel-take-off-services": news1,
+  "steel-detailing-for-pedestrian-bridges": news2,
+  "steel-detailing-change-orders": news3,
+};
 
 const FloatingPartnerBanner = () => (
   <div className="relative z-10 -mb-14 sm:-mb-16">
     <div className="container mx-auto px-4">
       <div
-        className="mx-auto w-[95%] sm:w-[90%] md:w-[85%] lg:w-[75%] bg-[hsl(0,52%,36%)] rounded-xl py-6 sm:py-7 md:py-8 px-6 sm:px-10 md:px-16 flex items-center justify-between"
+        className="mx-auto w-[95%] sm:w-[90%] md:w-[85%] lg:w-[75%] bg-primary rounded-xl py-6 sm:py-7 md:py-8 px-6 sm:px-10 md:px-16 flex items-center justify-between"
         style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.25)" }}
       >
         <div className="flex-1 flex items-center justify-center">
@@ -97,34 +106,61 @@ const Footer = () => {
                 Recent Post
               </h4>
               <ul className="space-y-4">
-                {recentPosts.slice(0, 3).map((post) => (
-                  <li key={post.id}>
-                    <Link to={`/news/${post.slug}`} className="flex items-start gap-3 group">
-                      <div className="w-16 h-12 bg-primary-foreground/10 shrink-0 overflow-hidden">
-                        <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/40" />
-                      </div>
-                      <div>
-                        <p className="flex items-center gap-1 text-[10px] sm:text-xs text-primary mb-0.5">
-                          <CalendarDays className="w-3 h-3" />
-                          {post.date}
-                        </p>
-                        <p className="text-xs sm:text-sm text-primary-foreground/70 group-hover:text-primary transition-colors leading-snug">
-                          {post.title.length > 22 ? post.title.substring(0, 22) + "." : post.title}
-                        </p>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
+                {recentPosts.slice(0, 3).map((post) => {
+                  const img = post.image_url || newsFallback[post.slug];
+                  return (
+                    <li key={post.id}>
+                      <Link to={`/news/${post.slug}`} className="flex items-start gap-3 group">
+                        <div className="w-16 h-14 shrink-0 overflow-hidden border border-primary-foreground/10">
+                          {img ? (
+                            <img
+                              src={img}
+                              alt={post.title}
+                              loading="lazy"
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/40" />
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="flex items-center gap-1 text-[10px] sm:text-xs text-primary mb-1 font-semibold uppercase tracking-wider">
+                            <CalendarDays className="w-3 h-3" />
+                            {post.date}
+                          </p>
+                          <p className="text-xs sm:text-sm text-primary-foreground/70 group-hover:text-primary transition-colors leading-snug line-clamp-2">
+                            {post.title}
+                          </p>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
-            {/* Column 4: Image */}
+            {/* Column 4: Image with overlay */}
             <div className="hidden lg:block">
-              <img
-                src={footerEngineer}
-                alt="Engineer working on steel detailing"
-                className="w-full h-full object-cover max-h-64"
-              />
+              <div className="relative h-full min-h-[240px] overflow-hidden group">
+                <img
+                  src={footerEngineer}
+                  alt="Engineer working on steel detailing"
+                  className="w-full h-full object-cover absolute inset-0 transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="text-[10px] uppercase tracking-[3px] text-primary font-semibold mb-2">
+                    Get Started
+                  </p>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center gap-2 text-primary-foreground font-heading font-bold text-sm hover:gap-3 transition-all"
+                  >
+                    Request a Quote
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -63,7 +63,7 @@ const HeroSection = () => {
             <br />
             Standards
             <br />
-            <span className="text-[hsl(0,70%,65%)]">of Detailing</span>
+            <span className="text-primary">of Detailing</span>
           </motion.h1>
 
           <motion.p

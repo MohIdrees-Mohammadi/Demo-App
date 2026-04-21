@@ -1,9 +1,10 @@
 import { useState } from "react";
 import AdminLayout from "@/components/admin/AdminLayout";
+import AdminPageHeader from "@/components/admin/AdminPageHeader";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Plus, Pencil, Trash2, X, Save } from "lucide-react";
+import { Plus, Pencil, Trash2, Save, Newspaper, ArrowLeft } from "lucide-react";
 
 interface NewsItem {
   id: string;
@@ -229,44 +230,67 @@ const AdminNews = () => {
             </div>
           </form>
         ) : isLoading ? (
-          <div className="text-center py-12 text-muted-foreground">Loading...</div>
+          <div className="text-center py-16 bg-card border border-border rounded-xl text-muted-foreground">
+            <div className="animate-spin w-8 h-8 border-[3px] border-primary border-t-transparent rounded-full mx-auto mb-3" />
+            Loading articles...
+          </div>
         ) : news.length === 0 ? (
-          <div className="text-center py-12 bg-card border border-border">
-            <p className="text-muted-foreground mb-4">No news articles yet.</p>
+          <div className="text-center py-16 bg-card border border-dashed border-border rounded-xl">
+            <Newspaper className="w-10 h-10 text-muted-foreground/40 mx-auto mb-4" />
+            <p className="text-muted-foreground mb-5">No news articles yet.</p>
             <button onClick={() => setCreating(true)} className="btn-primary text-sm inline-flex items-center gap-2">
               <Plus className="w-4 h-4" /> Create First Article
             </button>
           </div>
         ) : (
-          <div className="bg-card border border-border overflow-hidden">
+          <div className="bg-card border border-border overflow-hidden rounded-xl shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-border bg-muted/50">
-                    <th className="text-left px-4 py-3 font-medium text-muted-foreground">Title</th>
-                    <th className="text-left px-4 py-3 font-medium text-muted-foreground hidden sm:table-cell">Date</th>
-                    <th className="text-left px-4 py-3 font-medium text-muted-foreground hidden md:table-cell">Category</th>
-                    <th className="text-right px-4 py-3 font-medium text-muted-foreground">Actions</th>
+                  <tr className="border-b border-border bg-muted/40">
+                    <th className="text-left px-5 py-3.5 text-[11px] uppercase tracking-wider font-semibold text-muted-foreground">Title</th>
+                    <th className="text-left px-5 py-3.5 text-[11px] uppercase tracking-wider font-semibold text-muted-foreground hidden sm:table-cell">Date</th>
+                    <th className="text-left px-5 py-3.5 text-[11px] uppercase tracking-wider font-semibold text-muted-foreground hidden md:table-cell">Category</th>
+                    <th className="text-right px-5 py-3.5 text-[11px] uppercase tracking-wider font-semibold text-muted-foreground">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {news.map((item) => (
-                    <tr key={item.id} className="border-b border-border last:border-0 hover:bg-muted/30">
-                      <td className="px-4 py-3 font-medium text-foreground">{item.title}</td>
-                      <td className="px-4 py-3 text-muted-foreground hidden sm:table-cell">{item.date}</td>
-                      <td className="px-4 py-3 text-muted-foreground hidden md:table-cell">{item.category}</td>
-                      <td className="px-4 py-3 text-right">
-                        <div className="flex items-center justify-end gap-2">
-                          <button onClick={() => startEdit(item)} className="p-1.5 hover:bg-primary/10 text-primary transition-colors">
-                            <Pencil className="w-4 h-4" />
+                    <tr key={item.id} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors">
+                      <td className="px-5 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-md overflow-hidden bg-muted shrink-0 border border-border">
+                            {item.image_url ? (
+                              <img src={item.image_url} alt="" className="w-full h-full object-cover" />
+                            ) : (
+                              <div className="w-full h-full bg-gradient-to-br from-primary/20 to-secondary/30" />
+                            )}
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-medium text-foreground line-clamp-1">{item.title}</p>
+                            <p className="text-[11px] text-muted-foreground line-clamp-1 sm:hidden">{item.date}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-5 py-4 text-muted-foreground hidden sm:table-cell">{item.date}</td>
+                      <td className="px-5 py-4 hidden md:table-cell">
+                        <span className="inline-block px-2.5 py-1 text-[10px] uppercase tracking-wider font-semibold bg-primary/10 text-primary rounded">
+                          {item.category}
+                        </span>
+                      </td>
+                      <td className="px-5 py-4 text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          <button onClick={() => startEdit(item)} className="p-2 hover:bg-primary/10 text-primary rounded-md transition-colors" title="Edit">
+                            <Pencil className="w-3.5 h-3.5" />
                           </button>
                           <button
                             onClick={() => {
                               if (confirm("Delete this article?")) deleteMutation.mutate(item.id);
                             }}
-                            className="p-1.5 hover:bg-destructive/10 text-destructive transition-colors"
+                            className="p-2 hover:bg-destructive/10 text-destructive rounded-md transition-colors"
+                            title="Delete"
                           >
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </td>

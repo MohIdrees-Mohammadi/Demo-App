@@ -9,9 +9,9 @@ interface AnimatedSectionProps {
 }
 
 const directionMap = {
-  up: { y: 20, x: 0 },
-  left: { x: -20, y: 0 },
-  right: { x: 20, y: 0 },
+  up: { y: 24, x: 0 },
+  left: { x: -24, y: 0 },
+  right: { x: 24, y: 0 },
 };
 
 const AnimatedSection = ({ children, className, delay = 0, direction = "up" }: AnimatedSectionProps) => {
@@ -21,8 +21,8 @@ const AnimatedSection = ({ children, className, delay = 0, direction = "up" }: A
       className={className}
       initial={{ opacity: 0, ...offset }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.4, delay: Math.min(delay, 0.2), ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, delay: Math.min(delay, 0.3), ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>

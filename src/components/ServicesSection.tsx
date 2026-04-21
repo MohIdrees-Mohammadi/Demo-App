@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import AnimatedSection from "./AnimatedSection";
 import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 import { supabase } from "@/integrations/supabase/client";
 import serviceStructural from "@/assets/service-structural.jpg";
 import serviceMisc from "@/assets/service-misc.jpg";
@@ -26,46 +27,63 @@ const ServicesSection = () => {
   });
 
   return (
-    <section className="py-12 sm:py-16 md:py-24 bg-background overflow-hidden">
-      <div className="container mx-auto px-4">
-        <AnimatedSection className="text-center mb-10 sm:mb-12 md:mb-16">
-          <p className="section-subtitle mb-2 sm:mb-3 text-xs sm:text-sm">Our Expertise</p>
-          <h2 className="section-title text-2xl sm:text-3xl md:text-4xl">
-            SERVICES — <span className="text-primary">What We Do</span>
-          </h2>
-          <div className="w-12 sm:w-16 h-1 bg-primary mx-auto mt-4 sm:mt-6" />
-        </AnimatedSection>
+    <section className="py-16 sm:py-20 md:py-28 bg-background overflow-hidden relative">
+      {/* Subtle background ornament */}
+      <div className="pointer-events-none absolute -top-20 -right-20 w-96 h-96 rounded-full bg-primary/5 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -left-20 w-96 h-96 rounded-full bg-secondary/5 blur-3xl" />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 md:gap-8">
+      <div className="container mx-auto px-4 relative">
+        <SectionHeading
+          eyebrow="Our Expertise"
+          title={<>What We <span className="text-primary italic">Do Best</span></>}
+          description="Premier steel detailing services delivered with precision, reliability, and the highest industry standards."
+        />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7">
           {services.map((service, i) => {
             const image = service.image_url || fallbackImages[service.slug] || serviceStructural;
             return (
               <motion.div
                 key={service.id}
-                className="group bg-card border border-border overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="group relative bg-card border border-border overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 hover:border-primary/30"
               >
-                <Link to={`/services/${service.slug}`}>
-                  <div className="overflow-hidden relative">
+                <Link to={`/services/${service.slug}`} className="block">
+                  <div className="relative overflow-hidden aspect-[4/3]">
                     <img
                       src={image}
                       alt={service.title}
                       loading="lazy"
-                      className="w-full h-44 sm:h-48 md:h-52 object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/20 transition-colors duration-500" />
-                  </div>
-                  <div className="p-4 sm:p-5 md:p-6">
-                    <div className="w-8 sm:w-10 h-0.5 bg-primary mb-3 sm:mb-4 group-hover:w-full transition-all duration-500" />
-                    <h3 className="text-sm sm:text-base md:text-lg font-heading font-bold text-secondary mb-2 sm:mb-3 group-hover:text-primary transition-colors">
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/30 to-transparent" />
+                    {/* Number badge */}
+                    <div className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center bg-primary text-primary-foreground font-heading font-bold text-sm">
+                      0{i + 1}
+                    </div>
+                    {/* Arrow */}
+                    <div className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 text-primary-foreground translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
+                    {/* Title overlay on image bottom */}
+                    <h3 className="absolute bottom-4 left-4 right-4 font-heading font-bold text-primary-foreground text-base md:text-lg leading-tight">
                       {service.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  </div>
+
+                  <div className="p-6">
+                    <div className="w-10 h-0.5 bg-primary mb-4 transition-all duration-500 group-hover:w-20" />
+                    <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
                       {service.description}
                     </p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-xs font-heading font-bold uppercase tracking-wider text-primary group-hover:gap-3 transition-all">
+                      Learn More
+                      <ArrowUpRight className="w-3.5 h-3.5" />
+                    </span>
                   </div>
                 </Link>
               </motion.div>

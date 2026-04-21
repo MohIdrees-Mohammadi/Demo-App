@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import AdminLayout from "@/components/admin/AdminLayout";
+import AdminPageHeader from "@/components/admin/AdminPageHeader";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import { Save } from "lucide-react";
+import { Save, Briefcase } from "lucide-react";
 
 const AdminWhatWeDo = () => {
   const { toast } = useToast();
@@ -65,13 +66,14 @@ const AdminWhatWeDo = () => {
 
   return (
     <AdminLayout>
-      <div className="space-y-6">
-        <div>
-          <h2 className="text-xl font-heading font-bold text-foreground">What We Do Page</h2>
-          <p className="text-muted-foreground text-sm mt-1">Edit the main content displayed on the What We Do page.</p>
-        </div>
+      <div className="space-y-6 max-w-4xl">
+        <AdminPageHeader
+          icon={Briefcase}
+          title="What We Do Page"
+          description="Edit the main content displayed on the What We Do page."
+        />
 
-        <form onSubmit={handleSubmit} className="bg-card border border-border p-6 space-y-5 max-w-2xl">
+        <form onSubmit={handleSubmit} className="bg-card border border-border p-6 sm:p-8 rounded-xl space-y-5 shadow-sm">
           <div>
             <label className="block text-xs font-medium text-secondary mb-1.5">Section Subtitle</label>
             <input
@@ -123,14 +125,16 @@ const AdminWhatWeDo = () => {
             />
           </div>
 
-          <button
-            type="submit"
-            disabled={saveMutation.isPending}
-            className="btn-primary inline-flex items-center gap-2 text-sm"
-          >
-            <Save className="w-4 h-4" />
-            {saveMutation.isPending ? "Saving..." : "Save Changes"}
-          </button>
+          <div className="pt-3 border-t border-border">
+            <button
+              type="submit"
+              disabled={saveMutation.isPending}
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-heading font-bold uppercase tracking-wider text-xs px-6 py-3 rounded-md hover:bg-primary/90 hover:shadow-md hover:shadow-primary/20 transition-all disabled:opacity-50"
+            >
+              <Save className="w-4 h-4" />
+              {saveMutation.isPending ? "Saving..." : "Save Changes"}
+            </button>
+          </div>
         </form>
       </div>
     </AdminLayout>

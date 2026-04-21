@@ -1,57 +1,85 @@
-import { Quote } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 import { motion } from "framer-motion";
-import AnimatedSection from "./AnimatedSection";
+import SectionHeading from "./SectionHeading";
 
 const testimonials = [
   {
     name: "Williams",
-    location: "USA",
-    text: "AceroEngineering LLC delivered exceptional steel detailing services for us at a great price.",
+    location: "Texas, USA",
+    role: "Project Manager",
+    text: "AceroEngineering LLC delivered exceptional steel detailing services for us at a great price. Their attention to detail set them apart.",
   },
   {
     name: "Liam",
-    location: "USA",
-    text: "I am really impressed with your work and you can expect good projects in the near future.",
+    location: "Ohio, USA",
+    role: "Fabricator",
+    text: "I am really impressed with your work and you can expect good projects in the near future. Reliable, accurate, and consistently on time.",
   },
   {
     name: "Alexander",
-    location: "USA",
-    text: "I appreciate your command on the project and your dedication to complete the work on time.",
+    location: "California, USA",
+    role: "Structural Engineer",
+    text: "I appreciate your command on the project and your dedication to complete the work on time. A truly professional team.",
   },
 ];
 
 const TestimonialsSection = () => {
   return (
-    <section className="py-12 sm:py-16 md:py-24 bg-muted overflow-hidden">
-      <div className="container mx-auto px-4">
-        <AnimatedSection className="text-center mb-10 sm:mb-12 md:mb-16">
-          <p className="section-subtitle mb-2 sm:mb-3 text-xs sm:text-sm">Testimonials</p>
-          <h2 className="section-title text-2xl sm:text-3xl md:text-4xl">Client Feedback</h2>
-          <div className="w-12 sm:w-16 h-1 bg-primary mx-auto mt-4 sm:mt-6" />
-        </AnimatedSection>
+    <section className="py-16 sm:py-20 md:py-28 bg-muted overflow-hidden relative">
+      {/* Decorative quote watermark */}
+      <Quote
+        className="absolute top-12 right-8 md:right-20 w-40 h-40 md:w-64 md:h-64 text-primary/[0.04] -scale-x-100"
+        aria-hidden
+      />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+      <div className="container mx-auto px-4 relative">
+        <SectionHeading
+          eyebrow="Testimonials"
+          title={<>What Our <span className="text-primary italic">Clients</span> Say</>}
+          description="Trusted by fabricators, engineers, and project managers across the United States and Canada."
+        />
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              className="bg-card p-5 sm:p-6 md:p-8 relative border border-border shadow-sm hover:shadow-xl transition-all duration-500 group"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+              className="group relative bg-card p-7 md:p-8 border border-border shadow-sm hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1.5 hover:border-primary/30 transition-all duration-500 flex flex-col"
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-primary scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-              <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-primary/20 mb-3 sm:mb-4" />
-              <p className="text-muted-foreground mb-4 sm:mb-6 leading-relaxed italic text-xs sm:text-sm md:text-base">
+              {/* Top accent */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-primary scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
+
+              {/* Quote icon badge */}
+              <div className="absolute -top-5 right-7 w-11 h-11 bg-primary text-primary-foreground flex items-center justify-center shadow-lg">
+                <Quote className="w-5 h-5" />
+              </div>
+
+              {/* Stars */}
+              <div className="flex items-center gap-0.5 mb-4">
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <Star key={idx} className="w-4 h-4 fill-accent text-accent" />
+                ))}
+              </div>
+
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed italic mb-7 flex-1">
                 "{t.text}"
               </p>
-              <div className="flex items-center gap-3 sm:gap-4 pt-3 sm:pt-4 border-t border-border">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm sm:text-lg font-heading shrink-0">
+
+              <div className="flex items-center gap-4 pt-5 border-t border-border">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center text-primary-foreground font-bold text-lg font-heading shrink-0 shadow-md">
                   {t.name[0]}
                 </div>
                 <div>
-                  <h4 className="font-bold text-secondary font-heading text-sm sm:text-base">{t.name}</h4>
-                  <p className="text-[10px] sm:text-xs text-muted-foreground">{t.location}</p>
+                  <h4 className="font-bold text-secondary font-heading text-base leading-none">
+                    {t.name}
+                  </h4>
+                  <p className="text-xs text-primary mt-1.5 font-semibold uppercase tracking-wider">
+                    {t.role}
+                  </p>
+                  <p className="text-[11px] text-muted-foreground mt-0.5">{t.location}</p>
                 </div>
               </div>
             </motion.div>
