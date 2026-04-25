@@ -17,9 +17,10 @@ import {
 
 const navItems = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard, hint: "Overview" },
-  { label: "News", href: "/admin/news", icon: Newspaper, hint: "Articles" },
   { label: "Services", href: "/admin/services", icon: Wrench, hint: "Catalog" },
-  { label: "What We Do", href: "/admin/what-we-do", icon: Briefcase, hint: "Page" },
+  { label: "Projects", href: "/admin/projects", icon: Newspaper, hint: "Portfolio" },
+  { label: "Careers", href: "/admin/careers", icon: Briefcase, hint: "Hiring" },
+  { label: "Quotes", href: "/admin/quotes", icon: Briefcase, hint: "Inbox" },
   { label: "Theme", href: "/admin/theme", icon: Palette, hint: "Appearance" },
 ];
 
@@ -52,12 +53,12 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
         {/* Brand */}
         <div className="px-6 pt-7 pb-6 border-b border-primary-foreground/10 flex items-center justify-between">
           <Link to="/admin/dashboard" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/60 rounded-md flex items-center justify-center font-heading font-bold text-primary-foreground shadow-lg shadow-primary/30">
-              A
+            <div className="w-10 h-10 bg-primary rounded-md flex items-center justify-center font-heading font-extrabold text-primary-foreground shadow-lg shadow-primary/30">
+              B
             </div>
             <div>
-              <p className="text-sm font-heading font-bold leading-tight">
-                <span className="text-primary">A</span>cero<span className="text-primary">E</span>ng
+              <p className="text-sm font-heading font-extrabold leading-tight uppercase tracking-tight">
+                Brandford
               </p>
               <p className="text-[10px] uppercase tracking-[3px] text-primary-foreground/50 mt-0.5">
                 Admin Panel

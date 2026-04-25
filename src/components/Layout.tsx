@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import ChatButton from "./ChatButton";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -18,6 +19,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <Navbar />
       <main>{children}</main>
       <Footer />
+      <ChatButton />
     </div>
   );
 };

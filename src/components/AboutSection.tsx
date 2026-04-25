@@ -1,125 +1,134 @@
-import { CheckCircle } from "lucide-react";
+import { CheckCircle2, Compass, Users, ShieldCheck } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
-import aboutEngineerImg from "@/assets/about-engineer.jpg";
-import aboutSteelImg from "@/assets/about-steel-structure.jpg";
+import aboutImg from "@/assets/brandford-about.jpg";
 import { Link } from "react-router-dom";
 
-const services = [
-  "Estimodeling / Estimation",
-  "Shop drawings and erection drawings",
-  "Procurement reports like ABM, Shop bolt summary, field bolt summary",
-  "Production reports like CNC, KISS and DXF and other reports as per fabricator request",
-  "Detailing work within the guidelines set by AISC, NISD, OSHA",
+const whatWeDoItems = [
+  "Construction services",
+  "Engineering design and drafting",
+  "Shop drawings and detailing",
+  "Material sourcing and supply",
 ];
 
 const AboutSection = () => {
   return (
     <>
-      {/* Committed to Excellence Section */}
+      {/* Who We Are */}
       <section className="py-16 md:py-24 bg-background overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <AnimatedSection direction="left">
               <img
-                src={aboutEngineerImg}
-                alt="Engineer working on steel detailing CAD software"
-                className="w-full h-auto rounded shadow-lg"
+                src={aboutImg}
+                alt="Brandford construction project manager on site"
+                className="w-full h-auto rounded-lg shadow-xl"
                 loading="lazy"
-                width={768}
-                height={512}
+                width={1280}
+                height={896}
               />
             </AnimatedSection>
 
             <AnimatedSection direction="right">
-              <p className="text-primary font-semibold text-xs sm:text-sm tracking-widest uppercase mb-3 flex items-center gap-2">
-                <span className="w-3 h-3 bg-primary inline-block" />
-                Great Experience In Steel Detailing
-              </p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground mb-6 leading-tight">
-                We Are Committed to Excellence
+              <p className="section-eyebrow mb-4">Who We Are</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-foreground mb-6 leading-tight">
+                Building with purpose, <span className="text-primary">delivering with precision</span>
               </h2>
               <div className="border-l-4 border-primary pl-5 mb-8">
                 <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
-                  AceroEngineering LLC is committed to providing customised solutions
-                  for our clients, ensuring complete satisfaction in the most efficient and
-                  cost effective manner. We do this by utilising our unique project work-flow
-                  and highly experienced team. Our mission is to provide a design
-                  and detail drafting service that is second to none.
+                  We are a multidisciplinary company providing construction, engineering, and material solutions. Our team works closely with clients to deliver practical, efficient, and high-quality results.
                 </p>
               </div>
 
-              <div className="mb-6">
-                <span className="inline-block bg-secondary text-primary-foreground text-xs sm:text-sm font-semibold px-5 py-2 rounded-full">
-                  We Provide
-                </span>
-              </div>
-
-              <ul className="space-y-3">
-                {services.map((service) => (
-                  <li key={service} className="flex items-start gap-2 text-muted-foreground text-sm sm:text-base">
-                    <CheckCircle className="w-4 h-4 text-primary mt-1 shrink-0" />
-                    <span>{service}</span>
-                  </li>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  { icon: Users, label: "Experienced Team" },
+                  { icon: ShieldCheck, label: "Safety First" },
+                  { icon: Compass, label: "Clear Communication" },
+                  { icon: CheckCircle2, label: "Quality Guarantee" },
+                ].map((b) => (
+                  <div key={b.label} className="flex items-center gap-3 p-3 rounded-md bg-muted/50">
+                    <div className="w-10 h-10 rounded-md bg-primary/10 text-primary flex items-center justify-center">
+                      <b.icon className="w-5 h-5" />
+                    </div>
+                    <p className="text-sm font-semibold text-foreground">{b.label}</p>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* CTA Bar */}
-      <section className="bg-primary py-10 md:py-14 overflow-hidden">
-        <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold text-primary-foreground mb-2">
-              Looking for Steel Detailing Services?
-            </h3>
-            <p className="text-primary-foreground/70 text-sm sm:text-base">
-              We can do Steel detailing Services at best prices available in the market.
-            </p>
+      {/* Our Approach */}
+      <section className="py-16 md:py-24 bg-muted/40 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <AnimatedSection>
+              <p className="section-eyebrow mb-4 justify-center">Our Approach</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-foreground mb-6 leading-tight">
+                Clear communication. <span className="text-primary">Careful planning.</span>
+              </h2>
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+                We believe in clear communication, careful planning, and delivering work that meets both technical and project requirements. Every Brandford project is built on the same disciplined approach — from the first call to final close-out.
+              </p>
+            </AnimatedSection>
           </div>
-          <Link
-            to="/contact"
-            className="border-2 border-primary-foreground text-primary-foreground px-8 py-3 text-sm font-semibold hover:bg-primary-foreground hover:text-primary transition-colors whitespace-nowrap"
-          >
-            Get A Quote →
-          </Link>
         </div>
       </section>
 
-      {/* Vision & Mission Section */}
+      {/* What We Do */}
       <section className="py-16 md:py-24 bg-background overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <AnimatedSection direction="left">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-foreground mb-8 leading-tight italic">
-                Vision &amp; Mission
-              </h2>
-              <div className="flex items-start gap-4">
-                <CheckCircle className="w-6 h-6 text-primary mt-1 shrink-0" />
-                <p className="text-muted-foreground leading-relaxed text-sm sm:text-base lg:text-lg">
-                  Acero has a vision to give quality detailing services to fabricator in structural and
-                  miscellaneous detailing. Our experienced resources generate erection drawings
-                  and shop drawings using 3D software SDS/2.
-                </p>
-              </div>
-            </AnimatedSection>
-            <AnimatedSection direction="right">
-              <div className="relative min-h-[350px] rounded shadow-lg overflow-hidden">
-                <img
-                  src={aboutSteelImg}
-                  alt="Steel structure connections"
-                  className="absolute inset-0 w-full h-full object-cover"
-                  loading="lazy"
-                  width={768}
-                  height={512}
-                />
-              </div>
-            </AnimatedSection>
+          <AnimatedSection className="text-center mb-12">
+            <p className="section-eyebrow mb-4 justify-center">What We Do</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-foreground leading-tight">
+              Capabilities that <span className="text-primary">cover every stage</span>
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
+            {whatWeDoItems.map((item, i) => (
+              <AnimatedSection key={item} delay={i * 0.08}>
+                <div className="bg-card border border-border rounded-xl p-6 h-full flex items-start gap-3 hover:border-primary/40 hover:shadow-lg transition-all">
+                  <div className="w-9 h-9 shrink-0 rounded-md bg-primary text-primary-foreground flex items-center justify-center font-heading font-bold text-sm">
+                    0{i + 1}
+                  </div>
+                  <p className="text-sm font-semibold text-foreground leading-snug pt-1.5">{item}</p>
+                </div>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* Our Commitment */}
+      <section className="py-16 md:py-24 bg-secondary overflow-hidden relative">
+        <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+        <div className="absolute -top-32 right-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <AnimatedSection>
+              <p className="inline-flex items-center gap-3 text-xs uppercase tracking-[4px] text-primary font-bold mb-4 justify-center">
+                <span className="w-8 h-px bg-primary" />
+                Our Commitment
+              </p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-primary-foreground leading-tight mb-6">
+                Quality, safety, and <span className="text-primary">complete delivery</span>
+              </h2>
+              <p className="text-primary-foreground/70 text-base md:text-lg leading-relaxed mb-8">
+                We are committed to quality, safety, and delivering projects that meet client expectations from start to finish.
+              </p>
+              <Link
+                to="/quote"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-md font-heading font-bold text-sm uppercase tracking-wider hover:bg-primary/90 transition-all shadow-lg shadow-primary/30"
+              >
+                Start Your Project
+              </Link>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
     </>
   );
 };

@@ -2,7 +2,8 @@ import Layout from "@/components/Layout";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
 import FeaturesSection from "@/components/FeaturesSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
+import FeaturedProjectsSection from "@/components/FeaturedProjectsSection";
+import CtaSection from "@/components/CtaSection";
 import { WithPageLoader } from "@/components/PageLoader";
 
 const Index = () => {
@@ -12,7 +13,8 @@ const Index = () => {
         <HeroSection />
         <ServicesSection />
         <FeaturesSection />
-        <TestimonialsSection />
+        <FeaturedProjectsSection />
+        <CtaSection />
       </Layout>
     </WithPageLoader>
   );

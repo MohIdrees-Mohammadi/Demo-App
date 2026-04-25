@@ -5,40 +5,41 @@ const PageLoader = ({ onComplete }: { onComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const images = Array.from(document.images);
-    const total = images.length || 1;
-    let loaded = 0;
+    let isActive = true;
+    let settledAssets = 0;
+    const images = Array.from(document.images).filter((img) => !img.complete);
+    const totalAssets = images.length + 2;
 
-    const checkComplete = () => {
-      loaded++;
-      setProgress(Math.round((loaded / total) * 100));
-      if (loaded >= total) {
-        setTimeout(onComplete, 400);
+    const markReady = () => {
+      if (!isActive) return;
+      settledAssets += 1;
+      setProgress(Math.round((settledAssets / totalAssets) * 100));
+      if (settledAssets >= totalAssets) {
+        onComplete();
       }
     };
 
-    if (images.length === 0) {
-      setProgress(100);
-      setTimeout(onComplete, 400);
-      return;
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", markReady, { once: true });
+    } else {
+      markReady();
     }
 
+    document.fonts?.ready.then(markReady).catch(markReady);
+
     images.forEach((img) => {
-      if (img.complete) {
-        checkComplete();
-      } else {
-        img.addEventListener("load", checkComplete);
-        img.addEventListener("error", checkComplete);
-      }
+      img.addEventListener("load", markReady, { once: true });
+      img.addEventListener("error", markReady, { once: true });
     });
 
-    // Fallback timeout
-    const fallback = setTimeout(() => {
-      setProgress(100);
-      onComplete();
-    }, 6000);
-
-    return () => clearTimeout(fallback);
+    return () => {
+      isActive = false;
+      document.removeEventListener("DOMContentLoaded", markReady);
+      images.forEach((img) => {
+        img.removeEventListener("load", markReady);
+        img.removeEventListener("error", markReady);
+      });
+    };
   }, [onComplete]);
 
   return (
@@ -54,11 +55,11 @@ const PageLoader = ({ onComplete }: { onComplete: () => void }) => {
         transition={{ duration: 0.5 }}
         className="mb-8 text-center"
       >
-        <h1 className="text-2xl md:text-3xl font-heading font-bold text-primary-foreground tracking-wider">
-          ACERO<span className="text-primary">ENGINEERING</span>
+        <h1 className="text-2xl md:text-3xl font-heading font-extrabold text-primary-foreground tracking-wider uppercase">
+          Brand<span className="text-primary">ford</span>
         </h1>
         <p className="text-primary-foreground/40 text-xs tracking-[4px] uppercase mt-1">
-          Steel Detailing
+          Construction
         </p>
       </motion.div>
 

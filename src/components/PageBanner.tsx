@@ -1,34 +1,31 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ChevronRight, Home } from "lucide-react";
-import heroBg from "@/assets/hero-bg-new.jpg";
+import heroBg from "@/assets/brandford-hero.jpg";
 
 interface PageBannerProps {
   title: string;
   breadcrumb: string;
   parent?: { label: string; href: string };
+  description?: string;
 }
 
-const PageBanner = ({ title, breadcrumb, parent }: PageBannerProps) => {
+const PageBanner = ({ title, breadcrumb, parent, description }: PageBannerProps) => {
   return (
     <section className="relative bg-secondary pt-28 sm:pt-32 md:pt-40 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
-      {/* Background image with strong overlay */}
       <div className="absolute inset-0">
         <img
           src={heroBg}
           alt=""
           aria-hidden
-          className="w-full h-full object-cover opacity-30"
+          className="w-full h-full object-cover opacity-25"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/95 to-secondary/70" />
       </div>
 
-      {/* Decorative elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30" />
       <div className="absolute top-0 right-0 w-72 h-72 border border-primary-foreground/5 rounded-full translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 left-0 w-44 h-44 border border-primary-foreground/5 rounded-full -translate-x-1/3 translate-y-1/3" />
 
-      {/* Vertical accent line */}
       <motion.div
         initial={{ scaleY: 0 }}
         animate={{ scaleY: 1 }}
@@ -41,26 +38,37 @@ const PageBanner = ({ title, breadcrumb, parent }: PageBannerProps) => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-3 text-[11px] sm:text-xs uppercase tracking-[4px] text-primary font-semibold mb-4"
+          className="inline-flex items-center gap-3 text-[11px] sm:text-xs uppercase tracking-[4px] text-primary font-bold mb-4"
         >
           <span className="block w-8 h-px bg-primary" />
-          AceroEngineering LLC
+          Brandford Construction
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-primary-foreground tracking-tight leading-[1.05] text-balance mb-5 max-w-3xl"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-primary-foreground tracking-tight leading-[1.05] text-balance mb-5 max-w-3xl"
         >
           {title}
         </motion.h1>
+
+        {description && (
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-primary-foreground/70 text-sm sm:text-base max-w-2xl mb-5"
+          >
+            {description}
+          </motion.p>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex items-center gap-2 text-xs sm:text-sm text-primary-foreground/60 bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10 px-4 py-2.5 inline-flex w-fit"
+          className="flex items-center gap-2 text-xs sm:text-sm text-primary-foreground/60 bg-primary-foreground/5 backdrop-blur-sm border border-primary-foreground/10 px-4 py-2.5 rounded inline-flex w-fit"
         >
           <Link
             to="/"

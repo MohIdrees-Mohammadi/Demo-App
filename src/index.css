@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,39 +7,41 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 216 28% 17%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 216 28% 17%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 216 28% 17%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 0 62% 32%;
+    /* Brandford classic corporate blue */
+    --primary: 224 76% 40%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 216 28% 17%;
+    --secondary: 222 47% 11%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 220 14% 96%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 43 96% 56%;
-    --accent-foreground: 216 28% 17%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 0 62% 32%;
+    --ring: 224 76% 40%;
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
-    --navy: 216 28% 17%;
-    --navy-light: 216 20% 25%;
-    --maroon: 0 62% 32%;
-    --maroon-light: 0 55% 40%;
+    /* Aliases used across legacy components */
+    --navy: 222 47% 11%;
+    --navy-light: 222 30% 22%;
+    --maroon: 224 76% 40%;
+    --maroon-light: 217 91% 60%;
     --gold: 43 96% 56%;
     --steel: 220 9% 46%;
     --light-gray: 220 14% 96%;
@@ -87,12 +89,12 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-7 py-3 font-heading font-bold uppercase tracking-wider text-xs sm:text-sm
+    @apply inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-7 py-3 font-heading font-bold uppercase tracking-wider text-xs sm:text-sm rounded-md
            hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300;
   }
 
   .btn-outline-light {
-    @apply inline-flex items-center justify-center gap-2 border-2 border-primary-foreground text-primary-foreground px-7 py-3 font-heading font-bold uppercase tracking-wider text-xs sm:text-sm
+    @apply inline-flex items-center justify-center gap-2 border-2 border-primary-foreground text-primary-foreground px-7 py-3 font-heading font-bold uppercase tracking-wider text-xs sm:text-sm rounded-md
            hover:bg-primary-foreground hover:text-secondary transition-colors duration-300;
   }
 

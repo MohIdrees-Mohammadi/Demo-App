@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      job_postings: {
+        Row: {
+          created_at: string
+          description: string
+          employment_type: string
+          id: string
+          is_active: boolean
+          location: string
+          requirements: string[]
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          employment_type?: string
+          id?: string
+          is_active?: boolean
+          location?: string
+          requirements?: string[]
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          employment_type?: string
+          id?: string
+          is_active?: boolean
+          location?: string
+          requirements?: string[]
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       news: {
         Row: {
           category: string
@@ -50,6 +89,99 @@ export type Database = {
           slug?: string
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          category: string
+          cover_image_url: string
+          created_at: string
+          description: string
+          gallery_urls: string[]
+          id: string
+          location: string
+          scope: string[]
+          slug: string
+          sort_order: number
+          summary: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          cover_image_url?: string
+          created_at?: string
+          description?: string
+          gallery_urls?: string[]
+          id?: string
+          location?: string
+          scope?: string[]
+          slug: string
+          sort_order?: number
+          summary?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          cover_image_url?: string
+          created_at?: string
+          description?: string
+          gallery_urls?: string[]
+          id?: string
+          location?: string
+          scope?: string[]
+          slug?: string
+          sort_order?: number
+          summary?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      quote_requests: {
+        Row: {
+          budget: string
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          created_at: string
+          file_urls: string[]
+          id: string
+          location: string
+          project_description: string
+          service_needed: string
+          status: string
+          timeline: string
+        }
+        Insert: {
+          budget?: string
+          contact_email: string
+          contact_name: string
+          contact_phone?: string
+          created_at?: string
+          file_urls?: string[]
+          id?: string
+          location?: string
+          project_description?: string
+          service_needed: string
+          status?: string
+          timeline?: string
+        }
+        Update: {
+          budget?: string
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string
+          created_at?: string
+          file_urls?: string[]
+          id?: string
+          location?: string
+          project_description?: string
+          service_needed?: string
+          status?: string
+          timeline?: string
         }
         Relationships: []
       }
