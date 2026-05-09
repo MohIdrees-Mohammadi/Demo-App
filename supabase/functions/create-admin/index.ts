@@ -22,6 +22,12 @@ Deno.serve(async (req: Request) => {
     const adminExists = existingUsers?.users?.find(u => u.email === "admin@gmail.com");
 
     if (adminExists) {
+      // Reset password to known value
+      await supabaseAdmin.auth.admin.updateUserById(adminExists.id, {
+        password: "123123",
+        email_confirm: true,
+      });
+
       // Ensure role exists
       const { data: roleExists } = await supabaseAdmin
         .from("user_roles")
@@ -38,7 +44,7 @@ Deno.serve(async (req: Request) => {
       }
 
       return new Response(
-        JSON.stringify({ message: "Admin user already exists, role ensured" }),
+        JSON.stringify({ message: "Admin password reset and role ensured" }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }

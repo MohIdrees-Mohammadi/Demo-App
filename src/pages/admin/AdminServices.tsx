@@ -16,6 +16,7 @@ interface ServiceItem {
   inline_image1_url: string;
   inline_image2_url: string;
   paragraphs: string[];
+  bullets: string[];
   sort_order: number;
 }
 
@@ -28,6 +29,7 @@ const emptyService: Omit<ServiceItem, "id"> = {
   inline_image1_url: "",
   inline_image2_url: "",
   paragraphs: [""],
+  bullets: [""],
   sort_order: 0,
 };
 
@@ -97,6 +99,7 @@ const AdminServices = () => {
       inline_image1_url: item.inline_image1_url,
       inline_image2_url: item.inline_image2_url,
       paragraphs: item.paragraphs.length ? item.paragraphs : [""],
+      bullets: item.bullets?.length ? item.bullets : [""],
       sort_order: item.sort_order,
     });
   };
@@ -112,6 +115,12 @@ const AdminServices = () => {
     setForm((f) => ({ ...f, paragraphs: f.paragraphs.filter((_, idx) => idx !== i) }));
   const updateParagraph = (i: number, val: string) =>
     setForm((f) => ({ ...f, paragraphs: f.paragraphs.map((p, idx) => (idx === i ? val : p)) }));
+
+  const addBullet = () => setForm((f) => ({ ...f, bullets: [...f.bullets, ""] }));
+  const removeBullet = (i: number) =>
+    setForm((f) => ({ ...f, bullets: f.bullets.filter((_, idx) => idx !== i) }));
+  const updateBullet = (i: number, val: string) =>
+    setForm((f) => ({ ...f, bullets: f.bullets.map((b, idx) => (idx === i ? val : b)) }));
 
   const showForm = creating || editing;
 
@@ -244,6 +253,35 @@ const AdminServices = () => {
                     />
                     {form.paragraphs.length > 1 && (
                       <button type="button" onClick={() => removeParagraph(i)} className="text-destructive px-2">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="text-xs font-medium text-secondary">Bullets / Offerings</label>
+                <button type="button" onClick={addBullet} className="text-xs text-primary hover:underline">
+                  + Add Bullet
+                </button>
+              </div>
+              <p className="text-xs text-muted-foreground mb-2">
+                Use format: <code className="bg-muted px-1 rounded">Label – Description</code> (with en-dash or hyphen).
+              </p>
+              <div className="space-y-2">
+                {form.bullets.map((b, i) => (
+                  <div key={i} className="flex gap-2">
+                    <textarea
+                      value={b}
+                      onChange={(e) => updateBullet(i, e.target.value)}
+                      rows={2}
+                      className="flex-1 border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                      placeholder={`Bullet ${i + 1}`}
+                    />
+                    {form.bullets.length > 1 && (
+                      <button type="button" onClick={() => removeBullet(i)} className="text-destructive px-2">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     )}

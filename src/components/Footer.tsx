@@ -66,7 +66,7 @@ const Footer = () => {
               {[
                 { label: "Construction", href: "/services/construction" },
                 { label: "Engineering & Design", href: "/services/engineering-design" },
-                { label: "Material Supply", href: "/services/material-supply" },
+                
                 { label: "Get a Quote", href: "/quote" },
               ].map((link) => (
                 <li key={link.label}>

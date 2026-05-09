@@ -10,7 +10,7 @@ import { HardHat, Ruler, Package, Upload, Send, X, FileText, CheckCircle2 } from
 const SERVICES = [
   { value: "Construction", icon: HardHat, desc: "General contracting & build" },
   { value: "Engineering & Design", icon: Ruler, desc: "Drawings, design & PE stamping" },
-  { value: "Material Supply", icon: Package, desc: "Sourcing & delivery" },
+  
 ];
 
 const quoteSchema = z.object({

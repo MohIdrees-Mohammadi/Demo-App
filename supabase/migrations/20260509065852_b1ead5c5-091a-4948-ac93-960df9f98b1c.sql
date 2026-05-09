@@ -1,0 +1,1 @@
+DELETE FROM public.services WHERE slug = 'material-supply' OR title ILIKE '%material supply%';

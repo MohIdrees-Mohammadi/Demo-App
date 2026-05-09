@@ -57,6 +57,26 @@ const ServiceDetail = () => {
                     <p key={i} className="text-muted-foreground leading-relaxed text-sm sm:text-base">{p}</p>
                   ))}
                 </div>
+                {service.bullets && service.bullets.length > 0 && (
+                  <div className="mt-8 bg-muted/30 border border-border rounded-xl p-6 sm:p-8">
+                    <h3 className="font-heading font-extrabold text-foreground text-lg sm:text-xl mb-5">Our Services Include</h3>
+                    <ul className="space-y-4">
+                      {service.bullets.map((b, i) => {
+                        const [label, ...rest] = b.split(/\s[–-]\s/);
+                        const desc = rest.join(" – ");
+                        return (
+                          <li key={i} className="flex items-start gap-3 text-sm sm:text-base">
+                            <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                            <span className="text-muted-foreground leading-relaxed">
+                              <span className="font-heading font-bold text-foreground">{label}</span>
+                              {desc && <> — {desc}</>}
+                            </span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
               </AnimatedSection>
 
               <aside className="w-full lg:w-[320px] xl:w-[360px] shrink-0 space-y-5">

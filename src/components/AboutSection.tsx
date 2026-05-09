@@ -7,7 +7,7 @@ const whatWeDoItems = [
   "Construction services",
   "Engineering design and drafting",
   "Shop drawings and detailing",
-  "Material sourcing and supply",
+  
 ];
 
 const AboutSection = () => {

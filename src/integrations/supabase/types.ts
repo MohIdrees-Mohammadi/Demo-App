@@ -187,6 +187,7 @@ export type Database = {
       }
       services: {
         Row: {
+          bullets: string[]
           created_at: string
           description: string
           hero_image_url: string
@@ -201,6 +202,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          bullets?: string[]
           created_at?: string
           description?: string
           hero_image_url?: string
@@ -215,6 +217,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          bullets?: string[]
           created_at?: string
           description?: string
           hero_image_url?: string
