@@ -17,20 +17,20 @@ const Footer = () => {
               </h3>
             </div>
             <p className="text-xs sm:text-sm text-primary-foreground/55 leading-relaxed mb-6">
-              Brandford Construction delivers integrated construction, engineering, and material solutions — keeping projects on schedule and within budget.
+              Brandford Construction delivers integrated construction and engineering services that keep projects moving efficiently, on schedule, and within budget.
             </p>
             <div className="space-y-2.5">
               <p className="flex items-start gap-2 text-xs sm:text-sm text-primary-foreground/60">
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                123 Main Street, Suite 400
+                <span>5000 Thayer Center Ste C<br />Oakland, MD 21550</span>
               </p>
               <p className="flex items-center gap-2 text-xs sm:text-sm text-primary-foreground/60">
                 <Phone className="w-4 h-4 text-primary shrink-0" />
-                +93 747 877 431
+                (804) 372-0615
               </p>
               <p className="flex items-center gap-2 text-xs sm:text-sm text-primary-foreground/60">
                 <Mail className="w-4 h-4 text-primary shrink-0" />
-                info@brandford.com
+                info@brandford.us
               </p>
             </div>
           </div>

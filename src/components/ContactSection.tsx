@@ -5,10 +5,10 @@ import { z } from "zod";
 import AnimatedSection from "./AnimatedSection";
 
 const contactInfo = [
-  { icon: MapPin, label: "Our Office", value: "123 Main Street, Suite 400" },
-  { icon: Phone, label: "Phone", value: "+93 747 877 431" },
-  { icon: Mail, label: "Email", value: "info@brandford.com" },
-  { icon: Clock, label: "Working Hours", value: "Mon - Fri: 9AM - 6PM" },
+  { icon: MapPin, label: "Our Office", value: "5000 Thayer Center Ste C, Oakland, MD 21550" },
+  { icon: Phone, label: "Phone", value: "(804) 372-0615" },
+  { icon: Mail, label: "Email", value: "info@brandford.us" },
+  { icon: Clock, label: "Working Hours", value: "Mon - Fri: 7AM - 5PM" },
 ];
 
 const contactSchema = z.object({

@@ -33,9 +33,12 @@ const AboutSection = () => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-foreground mb-6 leading-tight">
                 Building with purpose, <span className="text-primary">delivering with precision</span>
               </h2>
-              <div className="border-l-4 border-primary pl-5 mb-8">
+              <div className="border-l-4 border-primary pl-5 mb-8 space-y-4">
                 <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
-                  We are a multidisciplinary company providing construction, engineering, and material solutions. Our team works closely with clients to deliver practical, efficient, and high-quality results.
+                  We are a multidisciplinary construction and engineering firm committed to turning complex challenges into practical, high quality solutions. Our team brings together builders, engineers, and technical specialists who collaborate closely with clients from concept through completion.
+                </p>
+                <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
+                  With a focus on efficiency, accuracy, and long term performance, we deliver work that stands up to real world demands — whether it's ground up construction, structural engineering, or detailed material and drafting support.
                 </p>
               </div>
 

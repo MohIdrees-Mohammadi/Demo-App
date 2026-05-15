@@ -48,11 +48,11 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            Construction,
+            Engineering.
             <br />
-            Engineering &
+            Construction.
             <br />
-            <span className="text-primary">Material Solutions</span>
+            <span className="text-primary">Delivered.</span>
           </motion.h1>
 
           <motion.p
@@ -61,7 +61,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            From design and detailing to supply and construction, we deliver complete solutions that keep your projects moving forward.
+            From engineering and detailing to procurement and construction, we deliver integrated solutions that drive projects from concept to completion.
           </motion.p>
 
           <motion.div
@@ -100,8 +100,8 @@ const HeroSection = () => {
             <div className="flex flex-col items-center py-4 gap-3 sm:gap-0 sm:flex-row sm:justify-between">
               <div className="flex items-center justify-center gap-8 sm:gap-12 w-full sm:w-auto">
                 {[
-                  { number: "500+", label: "Projects" },
-                  { number: "15+", label: "Years Exp." },
+                  { number: "15+", label: "Services" },
+                  { number: "15+", label: "Team Exp." },
                   { number: "100%", label: "On-Time" },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center sm:text-left">

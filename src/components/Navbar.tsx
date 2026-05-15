@@ -127,13 +127,13 @@ const Navbar = () => {
 
             <div className="mt-auto px-8 pb-8 pt-4 space-y-5">
               <div className="space-y-2.5">
-                <a href="mailto:info@brandford.com" className="flex items-center gap-3 text-primary-foreground/70 hover:text-primary transition-colors text-xs">
+                <a href="mailto:info@brandford.us" className="flex items-center gap-3 text-primary-foreground/70 hover:text-primary transition-colors text-xs">
                   <Mail className="w-3.5 h-3.5 text-primary shrink-0" />
-                  info@brandford.com
+                  info@brandford.us
                 </a>
-                <div className="flex items-center gap-3 text-primary-foreground/70 text-xs">
-                  <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
-                  123 Main Street, Suite 400
+                <div className="flex items-start gap-3 text-primary-foreground/70 text-xs">
+                  <MapPin className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
+                  <span>5000 Thayer Center Ste C, Oakland, MD 21550</span>
                 </div>
               </div>
 
