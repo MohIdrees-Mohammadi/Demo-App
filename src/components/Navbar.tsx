@@ -7,6 +7,9 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useSiteContent } from "@/hooks/useSiteContent";
+import logoDark from "@/assets/brandford-logo.png";
+import logoLight from "@/assets/brandford-logo-white.png";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -21,6 +24,12 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const location = useLocation();
+  const { get } = useSiteContent();
+  const brandName = get("site.brand.name", "Brandford");
+  const brandShort = get("site.brand.short", "B");
+  const brandSub = get("site.brand.tagline_small", "Construction");
+  const email = get("site.contact.email", "info@brandford.us");
+  const addr = `${get("site.contact.address_line1", "5000 Thayer Center Ste C")}, ${get("site.contact.address_line2", "Oakland, MD 21550")}`;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -49,13 +58,8 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
     >
       <div className={`container mx-auto flex items-center justify-between px-4 transition-all duration-300 ${scrolled ? "py-2.5" : "py-3.5"}`}>
-        <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
-          <div className="w-9 h-9 rounded-md bg-primary text-primary-foreground flex items-center justify-center font-heading font-extrabold text-lg shadow-md shadow-primary/20">
-            B
-          </div>
-          <span className="text-base sm:text-lg md:text-xl font-heading font-extrabold tracking-tight text-secondary uppercase">
-            Brandford
-          </span>
+        <Link to="/" className="flex items-center shrink-0 group" aria-label={brandName}>
+          <img src={logoDark} alt={`${brandName} Construction`} className="h-10 sm:h-12 md:h-14 w-auto" />
         </Link>
 
         {/* Desktop */}
@@ -91,16 +95,8 @@ const Navbar = () => {
             className="w-[340px] sm:w-[400px] bg-secondary p-0 border-l-0 flex flex-col [&>button]:text-primary-foreground [&>button]:hover:text-primary"
           >
             <div className="px-8 pt-10 pb-7">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-md bg-primary text-primary-foreground flex items-center justify-center font-heading font-extrabold text-xl shadow-md">
-                  B
-                </div>
-                <div>
-                  <h2 className="text-xl font-heading font-extrabold text-primary-foreground leading-tight uppercase">
-                    Brandford
-                  </h2>
-                  <p className="text-[10px] tracking-[3px] uppercase text-primary-foreground/60 mt-0.5">Construction</p>
-                </div>
+              <div className="flex items-center">
+                <img src={logoLight} alt={brandName} className="h-12 w-auto" />
               </div>
               <div className="w-14 h-[3px] bg-primary mt-5 rounded-full" />
             </div>
@@ -127,13 +123,13 @@ const Navbar = () => {
 
             <div className="mt-auto px-8 pb-8 pt-4 space-y-5">
               <div className="space-y-2.5">
-                <a href="mailto:info@brandford.us" className="flex items-center gap-3 text-primary-foreground/70 hover:text-primary transition-colors text-xs">
+                <a href={`mailto:${email}`} className="flex items-center gap-3 text-primary-foreground/70 hover:text-primary transition-colors text-xs">
                   <Mail className="w-3.5 h-3.5 text-primary shrink-0" />
-                  info@brandford.us
+                  {email}
                 </a>
                 <div className="flex items-start gap-3 text-primary-foreground/70 text-xs">
                   <MapPin className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
-                  <span>5000 Thayer Center Ste C, Oakland, MD 21550</span>
+                  <span>{addr}</span>
                 </div>
               </div>
 

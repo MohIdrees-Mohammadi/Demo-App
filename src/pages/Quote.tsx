@@ -6,6 +6,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { HardHat, Ruler, Package, Upload, Send, X, FileText, CheckCircle2 } from "lucide-react";
+import { useSiteContent } from "@/hooks/useSiteContent";
+import Seo from "@/components/Seo";
+
 
 const SERVICES = [
   { value: "Construction", icon: HardHat, desc: "General contracting & build" },
@@ -25,6 +28,7 @@ const quoteSchema = z.object({
 });
 
 const Quote = () => {
+  const { get } = useSiteContent();
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -82,11 +86,17 @@ const Quote = () => {
 
   return (
     <WithPageLoader>
+      <Seo
+        title="Request a Quote — Brandford Construction"
+        description="Tell us about your construction or engineering project and Brandford will reply with pricing and next steps within 24 hours."
+        path="/quote"
+      />
       <Layout>
         <PageBanner
-          title="Request a Quote"
+          title={get("page.quote.title", "Request a Quote")}
           breadcrumb="Get a Quote"
           description="Tell us about your project and we'll get back to you with pricing and next steps."
+          bannerImage={get("page.quote.banner")}
         />
 
         <section className="py-12 md:py-16 bg-muted/40">

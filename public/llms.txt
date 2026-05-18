@@ -1,0 +1,18 @@
+# Brandford Construction
+
+> Integrated construction, engineering, and material supply services. From design and detailing to delivery, Brandford keeps projects moving on time and within budget.
+
+## Pages
+
+- [Home](/): Overview of Brandford Construction services and capabilities.
+- [About](/about): Who we are, our values, vision, and mission.
+- [Services](/services): Construction, engineering, and design services we offer.
+- [Projects](/projects): Portfolio of completed commercial, residential, and infrastructure projects.
+- [Careers](/careers): Open positions and life at Brandford.
+- [Request a Quote](/quote): Submit project details to receive pricing within 24 hours.
+- [Contact](/contact): Get in touch with our team.
+
+## Optional
+
+- [Construction Services](/services/construction): General contracting and construction delivery.
+- [Engineering & Design](/services/engineering-design): Structural engineering, detailing, and design.

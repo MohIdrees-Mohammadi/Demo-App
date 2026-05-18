@@ -2,8 +2,19 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import heroBg from "@/assets/brandford-hero.jpg";
+import { useSiteContent } from "@/hooks/useSiteContent";
+
+const DEFAULT_STATS = [
+  { number: "15+", label: "Services" },
+  { number: "15+", label: "Team Exp." },
+  { number: "100%", label: "On-Time" },
+];
 
 const HeroSection = () => {
+  const { get, getJSON } = useSiteContent();
+  const bg = get("home.hero.background", heroBg);
+  const stats = getJSON<{ number: string; label: string }[]>("home.hero.stats", DEFAULT_STATS);
+
   return (
     <section className="relative min-h-[100svh] flex items-center overflow-hidden">
       <motion.div
@@ -13,7 +24,7 @@ const HeroSection = () => {
         transition={{ duration: 12, ease: "easeOut" }}
       >
         <img
-          src={heroBg}
+          src={bg}
           alt="Construction site at sunset with cranes and steel framework"
           className="w-full h-full object-cover"
           width={1920}
@@ -23,13 +34,29 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-secondary/30" />
       </motion.div>
 
-      <div className="absolute inset-0 opacity-[0.04]" style={{
-        backgroundImage: `linear-gradient(hsl(var(--primary-foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary-foreground)) 1px, transparent 1px)`,
-        backgroundSize: '80px 80px'
-      }} />
+      <div
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: `linear-gradient(hsl(var(--primary-foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary-foreground)) 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
+        }}
+      />
 
       <div className="relative z-10 container mx-auto px-6 sm:px-8 md:px-16 lg:px-20 pt-24 pb-32">
         <div className="max-w-3xl">
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-extrabold text-primary-foreground leading-[1.02] tracking-tight mb-6 uppercase break-words [text-wrap:balance]"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+          >
+            {get("home.hero.title_line1", "Engineering.")}
+            <br />
+            {get("home.hero.title_line2", "Construction.")}
+            <br />
+            <span className="text-primary">{get("home.hero.title_line3", "")}</span>
+          </motion.h1>
+
           <motion.div
             className="flex items-center gap-3 mb-6"
             initial={{ opacity: 0, x: -20 }}
@@ -38,22 +65,9 @@ const HeroSection = () => {
           >
             <div className="w-12 h-px bg-primary" />
             <p className="text-[10px] sm:text-xs uppercase tracking-[4px] text-primary font-bold">
-              Brandford Construction
+              {get("home.hero.eyebrow", "Engineering. Construction. Delivered.")}
             </p>
           </motion.div>
-
-          <motion.h1
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-extrabold text-primary-foreground leading-[1.05] tracking-tight mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-          >
-            Engineering.
-            <br />
-            Construction.
-            <br />
-            <span className="text-primary">Delivered.</span>
-          </motion.h1>
 
           <motion.p
             className="text-primary-foreground/70 text-sm sm:text-base md:text-lg max-w-xl mb-9 leading-relaxed"
@@ -61,7 +75,10 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            From engineering and detailing to procurement and construction, we deliver integrated solutions that drive projects from concept to completion.
+            {get(
+              "home.hero.description",
+              "From engineering and detailing to procurement and construction, we deliver integrated solutions that drive projects from concept to completion.",
+            )}
           </motion.p>
 
           <motion.div
@@ -71,17 +88,17 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.9 }}
           >
             <Link
-              to="/quote"
+              to={get("home.hero.cta1_link", "/quote")}
               className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-7 py-3.5 sm:px-8 sm:py-4 rounded-md font-heading font-bold text-sm uppercase tracking-wider hover:bg-primary/90 transition-all shadow-lg shadow-primary/30"
             >
-              Get a Quote
+              {get("home.hero.cta1_label", "Get a Quote")}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
-              to="/projects"
+              to={get("home.hero.cta2_link", "/projects")}
               className="group inline-flex items-center gap-3 border border-primary-foreground/40 text-primary-foreground px-7 py-3.5 sm:px-8 sm:py-4 rounded-md font-heading font-bold text-sm uppercase tracking-wider hover:bg-primary-foreground/10 transition-all"
             >
-              View Projects
+              {get("home.hero.cta2_label", "View Projects")}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
@@ -99,12 +116,8 @@ const HeroSection = () => {
           <div className="container mx-auto px-4 sm:px-8 md:px-16 lg:px-20">
             <div className="flex flex-col items-center py-4 gap-3 sm:gap-0 sm:flex-row sm:justify-between">
               <div className="flex items-center justify-center gap-8 sm:gap-12 w-full sm:w-auto">
-                {[
-                  { number: "15+", label: "Services" },
-                  { number: "15+", label: "Team Exp." },
-                  { number: "100%", label: "On-Time" },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center sm:text-left">
+                {(stats || DEFAULT_STATS).map((stat, i) => (
+                  <div key={`${stat.label}-${i}`} className="text-center sm:text-left">
                     <p className="text-primary-foreground font-heading font-extrabold text-xl md:text-2xl leading-none">
                       {stat.number}
                     </p>

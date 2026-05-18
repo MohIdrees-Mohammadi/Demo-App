@@ -6,12 +6,16 @@ import PageBanner from "@/components/PageBanner";
 import { WithPageLoader } from "@/components/PageLoader";
 import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin, Filter } from "lucide-react";
+import { useSiteContent } from "@/hooks/useSiteContent";
+import Seo from "@/components/Seo";
+
 
 const CATEGORIES = ["All", "Construction Projects", "Engineering & Design", "Drawings & Models"];
 
 const Projects = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const activeCategory = searchParams.get("category") || "All";
+  const { get } = useSiteContent();
 
   const { data: projects = [], isLoading } = useQuery({
     queryKey: ["projects"],
@@ -31,11 +35,17 @@ const Projects = () => {
 
   return (
     <WithPageLoader>
+      <Seo
+        title="Projects — Brandford Construction Portfolio"
+        description="Browse Brandford's completed construction, engineering, and design projects across commercial, residential, and infrastructure work."
+        path="/projects"
+      />
       <Layout>
         <PageBanner
-          title="Our Projects"
+          title={get("page.projects.title", "Our Projects")}
           breadcrumb="Projects"
           description="Explore our work across construction, engineering, and design."
+          bannerImage={get("page.projects.banner")}
         />
 
         <section className="py-12 md:py-16 bg-background">

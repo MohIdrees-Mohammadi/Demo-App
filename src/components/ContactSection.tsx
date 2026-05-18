@@ -3,13 +3,8 @@ import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import AnimatedSection from "./AnimatedSection";
-
-const contactInfo = [
-  { icon: MapPin, label: "Our Office", value: "5000 Thayer Center Ste C, Oakland, MD 21550" },
-  { icon: Phone, label: "Phone", value: "(804) 372-0615" },
-  { icon: Mail, label: "Email", value: "info@brandford.us" },
-  { icon: Clock, label: "Working Hours", value: "Mon - Fri: 7AM - 5PM" },
-];
+import { useSiteContent } from "@/hooks/useSiteContent";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -20,13 +15,35 @@ const contactSchema = z.object({
 
 const ContactSection = () => {
   const { toast } = useToast();
+  const { get } = useSiteContent();
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const contactInfo = [
+    { icon: MapPin, label: "Our Office", value: `${get("site.contact.address_line1", "5000 Thayer Center Ste C")}, ${get("site.contact.address_line2", "Oakland, MD 21550")}` },
+    { icon: Phone, label: "Phone", value: get("site.contact.phone", "(804) 372-0615") },
+    { icon: Mail, label: "Email", value: get("site.contact.email", "info@brandford.us") },
+    { icon: Clock, label: "Working Hours", value: get("site.contact.hours", "Mon - Fri: 7AM - 5PM") },
+  ];
+
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = contactSchema.safeParse(formData);
     if (!result.success) {
       toast({ title: "Please check your form", description: result.error.errors[0].message, variant: "destructive" });
+      return;
+    }
+    setSubmitting(true);
+    const { error } = await supabase.from("contact_messages" as any).insert({
+      name: result.data.name,
+      email: result.data.email,
+      phone: result.data.phone ?? "",
+      message: result.data.message,
+    });
+    setSubmitting(false);
+    if (error) {
+      toast({ title: "Could not send", description: error.message, variant: "destructive" });
       return;
     }
     toast({ title: "Message Sent!", description: "We'll get back to you as soon as possible." });
@@ -41,10 +58,10 @@ const ContactSection = () => {
     <section id="contact" className="py-12 sm:py-16 md:py-24 bg-muted/40 overflow-hidden">
       <div className="container mx-auto px-4">
         <AnimatedSection className="text-center mb-12">
-          <p className="section-subtitle mb-3">Get In Touch</p>
-          <h2 className="section-title">Contact Us</h2>
+          <p className="section-subtitle mb-3">{get("contact.eyebrow", "Get In Touch")}</p>
+          <h2 className="section-title">{get("contact.title", "Contact Us")}</h2>
           <p className="text-muted-foreground mt-4 max-w-xl mx-auto text-sm sm:text-base">
-            Have questions or need more information? Contact us today.
+            {get("contact.description", "Have questions or need more information? Contact us today.")}
           </p>
         </AnimatedSection>
 
@@ -67,10 +84,10 @@ const ContactSection = () => {
             <div className="bg-card border border-border shadow-lg rounded-xl overflow-hidden">
               <div className="bg-primary px-6 md:px-8 py-5">
                 <h3 className="font-heading text-primary-foreground text-xl md:text-2xl font-extrabold">
-                  Send Us a Message
+                  {get("contact.form_title", "Send Us a Message")}
                 </h3>
                 <p className="text-primary-foreground/80 text-xs sm:text-sm mt-1">
-                  We typically respond within 24 hours.
+                  {get("contact.form_subtitle", "We typically respond within 24 hours.")}
                 </p>
               </div>
               <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-5">
@@ -112,8 +129,8 @@ const ContactSection = () => {
                     placeholder="Tell us about your project..."
                   />
                 </div>
-                <button type="submit" className="btn-primary w-full sm:w-auto">
-                  <Send className="w-4 h-4" /> Send Message
+                <button type="submit" disabled={submitting} className="btn-primary w-full sm:w-auto disabled:opacity-60">
+                  <Send className="w-4 h-4" /> {submitting ? "Sending..." : "Send Message"}
                 </button>
               </form>
             </div>

@@ -13,14 +13,18 @@ import {
   ExternalLink,
   Bell,
   Search,
+  FileText,
+  MessageSquare,
 } from "lucide-react";
 
 const navItems = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard, hint: "Overview" },
+  { label: "Site Content", href: "/admin/content", icon: FileText, hint: "Pages" },
   { label: "Services", href: "/admin/services", icon: Wrench, hint: "Catalog" },
   { label: "Projects", href: "/admin/projects", icon: Newspaper, hint: "Portfolio" },
   { label: "Careers", href: "/admin/careers", icon: Briefcase, hint: "Hiring" },
   { label: "Quotes", href: "/admin/quotes", icon: Briefcase, hint: "Inbox" },
+  { label: "Messages", href: "/admin/messages", icon: MessageSquare, hint: "Contact" },
   { label: "Theme", href: "/admin/theme", icon: Palette, hint: "Appearance" },
 ];
 
@@ -43,10 +47,10 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
   const currentItem = navItems.find((n) => n.href === location.pathname);
 
   return (
-    <div className="min-h-screen bg-muted/40 flex">
+    <div className="h-screen bg-muted/40 flex overflow-hidden">
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-72 bg-secondary text-primary-foreground transform transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-auto flex flex-col ${
+        className={`fixed inset-y-0 left-0 z-50 w-72 bg-secondary text-primary-foreground transform transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-auto lg:h-screen flex flex-col ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -151,7 +155,7 @@ const AdminLayout = ({ children }: { children: ReactNode }) => {
       )}
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
         <header className="sticky top-0 z-30 bg-background/85 backdrop-blur-md border-b border-border px-4 sm:px-8 py-4 flex items-center gap-4">
           <button
             onClick={() => setSidebarOpen(true)}

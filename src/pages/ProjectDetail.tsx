@@ -5,6 +5,8 @@ import Layout from "@/components/Layout";
 import PageBanner from "@/components/PageBanner";
 import { WithPageLoader } from "@/components/PageLoader";
 import { CheckCircle2, MapPin, ArrowLeft, ArrowRight } from "lucide-react";
+import Seo from "@/components/Seo";
+
 
 const ProjectDetail = () => {
   const { slug } = useParams();
@@ -33,6 +35,21 @@ const ProjectDetail = () => {
 
   return (
     <WithPageLoader>
+      <Seo
+        title={`${project.title} — Brandford Construction`}
+        description={project.summary || project.description || `${project.title} — a Brandford Construction project in ${project.location || "the field"}.`}
+        path={`/projects/${project.slug}`}
+        ogType="article"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          description: project.summary || project.description,
+          image: project.cover_image_url || undefined,
+          url: `/projects/${project.slug}`,
+          creator: { "@type": "Organization", name: "Brandford Construction" },
+        }}
+      />
       <Layout>
         <PageBanner
           title={project.title}

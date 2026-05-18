@@ -6,6 +6,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Briefcase, MapPin, Clock, ArrowRight, TrendingUp, Heart, Layers } from "lucide-react";
 import careersImg from "@/assets/brandford-careers.jpg";
 import { Link } from "react-router-dom";
+import { useSiteContent } from "@/hooks/useSiteContent";
+import Seo from "@/components/Seo";
+
 
 const benefits = [
   { icon: TrendingUp, label: "Professional growth opportunities", desc: "Continuous learning, mentorship, and a clear path forward." },
@@ -14,6 +17,7 @@ const benefits = [
 ];
 
 const Careers = () => {
+  const { get } = useSiteContent();
   const { data: jobs = [], isLoading } = useQuery({
     queryKey: ["job-postings"],
     queryFn: async () => {
@@ -32,8 +36,18 @@ const Careers = () => {
 
   return (
     <WithPageLoader>
+      <Seo
+        title="Careers at Brandford Construction — Join Our Team"
+        description="Build your career with Brandford Construction. Explore open positions in construction, engineering, and design across our growing project portfolio."
+        path="/careers"
+      />
       <Layout>
-        <PageBanner title="Careers" breadcrumb="Careers" description="Join Our Team — we are always looking for motivated individuals." />
+        <PageBanner
+          title={get("page.careers.title", "Careers")}
+          breadcrumb="Careers"
+          description="Join Our Team — we are always looking for motivated individuals."
+          bannerImage={get("page.careers.banner")}
+        />
 
         {/* Intro */}
         <section className="py-16 md:py-20 bg-background">
@@ -41,7 +55,7 @@ const Careers = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <p className="section-eyebrow mb-4">Join Our Team</p>
-                <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-5 leading-tight">
+                <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground mb-5 leading-tight uppercase">
                   Build your career with <span className="text-primary">Brandford</span>
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-6">
@@ -63,7 +77,7 @@ const Careers = () => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <p className="section-eyebrow mb-4 justify-center">Why Work With Us</p>
-              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground">What we offer</h2>
+              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground uppercase">What we offer</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {benefits.map((b) => (
@@ -84,7 +98,7 @@ const Careers = () => {
           <div className="container mx-auto px-4 max-w-5xl">
             <div className="text-center mb-10">
               <p className="section-eyebrow mb-4 justify-center">Open Positions</p>
-              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground">Roles we're hiring for</h2>
+              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-foreground uppercase">Roles we're hiring for</h2>
             </div>
 
             {isLoading ? (

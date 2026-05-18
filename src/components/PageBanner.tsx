@@ -8,14 +8,15 @@ interface PageBannerProps {
   breadcrumb: string;
   parent?: { label: string; href: string };
   description?: string;
+  bannerImage?: string;
 }
 
-const PageBanner = ({ title, breadcrumb, parent, description }: PageBannerProps) => {
+const PageBanner = ({ title, breadcrumb, parent, description, bannerImage }: PageBannerProps) => {
   return (
     <section className="relative bg-secondary pt-28 sm:pt-32 md:pt-40 pb-12 sm:pb-16 md:pb-20 overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src={heroBg}
+          src={bannerImage || heroBg}
           alt=""
           aria-hidden
           className="w-full h-full object-cover opacity-25"

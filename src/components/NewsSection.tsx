@@ -35,7 +35,7 @@ const NewsSection = () => {
           <p className="text-primary font-semibold tracking-widest uppercase text-xs sm:text-sm mb-3">
             News & Blogs
           </p>
-          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-secondary">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-secondary uppercase">
             Latest News
           </h2>
           <div className="w-16 h-1 bg-primary mx-auto mt-6" />

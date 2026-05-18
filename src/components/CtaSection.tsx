@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 const CtaSection = () => {
+  const { get } = useSiteContent();
   return (
     <section className="py-16 sm:py-20 md:py-24 bg-secondary relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-30" />
@@ -19,22 +21,22 @@ const CtaSection = () => {
         >
           <p className="inline-flex items-center gap-3 text-xs uppercase tracking-[4px] text-primary font-bold mb-5 justify-center">
             <span className="w-8 h-px bg-primary" />
-            Call to Action
+            {get("home.cta.eyebrow", "Call to Action")}
             <span className="w-8 h-px bg-primary" />
           </p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-primary-foreground leading-[1.1] mb-6">
-            Have a project in mind?
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-primary-foreground leading-[1.1] mb-6 uppercase">
+            {get("home.cta.title_line1", "Have a project in mind?")}
             <br />
-            <span className="text-primary">We'll help you get started.</span>
+            <span className="text-primary">{get("home.cta.title_line2", "We'll help you get started.")}</span>
           </h2>
           <p className="text-primary-foreground/65 text-base md:text-lg max-w-2xl mx-auto mb-9">
-            Send us your plans and we'll respond with a detailed quote and a clear path forward.
+            {get("home.cta.description", "Send us your plans and we'll respond with a detailed quote and a clear path forward.")}
           </p>
           <Link
-            to="/quote"
+            to={get("home.cta.button_link", "/quote")}
             className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-9 py-4 rounded-md font-heading font-bold text-sm uppercase tracking-wider hover:bg-primary/90 transition-all shadow-xl shadow-primary/30"
           >
-            Get a Quote
+            {get("home.cta.button_label", "Get a Quote")}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>

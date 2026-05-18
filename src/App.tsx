@@ -20,6 +20,8 @@ import AdminProjects from "./pages/admin/AdminProjects";
 import AdminCareers from "./pages/admin/AdminCareers";
 import AdminQuotes from "./pages/admin/AdminQuotes";
 import AdminTheme from "./pages/admin/AdminTheme";
+import AdminContent from "./pages/admin/AdminContent";
+import AdminMessages from "./pages/admin/AdminMessages";
 import { ThemeProvider } from "./contexts/ThemeContext";
 
 const queryClient = new QueryClient();
@@ -48,6 +50,8 @@ const App = () => (
             <Route path="/admin/careers" element={<AdminCareers />} />
             <Route path="/admin/quotes" element={<AdminQuotes />} />
             <Route path="/admin/theme" element={<AdminTheme />} />
+            <Route path="/admin/content" element={<AdminContent />} />
+            <Route path="/admin/messages" element={<AdminMessages />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

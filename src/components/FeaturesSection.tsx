@@ -1,16 +1,21 @@
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
-const reasons = [
-  "End-to-end project support",
-  "Experienced engineering and construction team",
-  "High-quality drawings and detailing",
-  "Reliable scheduling and delivery",
-  "Focus on safety and compliance",
+const DEFAULT_REASONS = [
+  { label: "End-to-end project support" },
+  { label: "Experienced engineering and construction team" },
+  { label: "High-quality drawings and detailing" },
+  { label: "Reliable scheduling and delivery" },
+  { label: "Focus on safety and compliance" },
+  { label: "Transparent communication and reporting" },
 ];
 
 const FeaturesSection = () => {
+  const { get, getJSON } = useSiteContent();
+  const reasons = getJSON<{ label: string }[]>("home.features.items", DEFAULT_REASONS);
+
   return (
     <section
       id="features"
@@ -23,16 +28,19 @@ const FeaturesSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeading
-          eyebrow="Why Choose Us"
-          title="A Partner You Can Build On"
-          description="Five reasons clients choose Brandford for their most important projects."
+          eyebrow={get("home.features.eyebrow", "Why Choose Us")}
+          title={get("home.features.title", "A Partner You Can Build On")}
+          description={get(
+            "home.features.description",
+            "Six reasons clients choose Brandford for their most important projects."
+          )}
           light
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 max-w-5xl mx-auto">
-          {reasons.map((reason, i) => (
+          {(reasons || DEFAULT_REASONS).map((reason, i) => (
             <motion.div
-              key={reason}
+              key={`${reason.label}-${i}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -44,7 +52,7 @@ const FeaturesSection = () => {
               </div>
               <div>
                 <p className="text-primary-foreground font-heading font-bold text-sm sm:text-base leading-snug">
-                  {reason}
+                  {reason.label}
                 </p>
               </div>
             </motion.div>

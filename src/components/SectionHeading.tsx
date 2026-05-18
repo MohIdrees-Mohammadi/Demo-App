@@ -40,7 +40,7 @@ const SectionHeading = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.5, delay: 0.05 }}
-        className={`font-heading font-bold tracking-tight leading-[1.1] text-balance text-3xl sm:text-4xl md:text-5xl ${
+        className={`font-heading font-bold tracking-tight leading-[1.1] text-balance text-3xl sm:text-4xl md:text-5xl uppercase ${
           light ? "text-primary-foreground" : "text-secondary"
         }`}
       >

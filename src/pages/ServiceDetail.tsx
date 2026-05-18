@@ -7,6 +7,8 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { WithPageLoader } from "@/components/PageLoader";
 import { supabase } from "@/integrations/supabase/client";
 import heroFallback from "@/assets/brandford-hero.jpg";
+import Seo from "@/components/Seo";
+
 
 const ServiceDetail = () => {
   const { slug } = useParams();
@@ -38,6 +40,19 @@ const ServiceDetail = () => {
 
   return (
     <WithPageLoader>
+      <Seo
+        title={`${service.title} — Brandford Construction`}
+        description={service.description || `${service.title} delivered by Brandford's experienced construction and engineering team.`}
+        path={`/services/${service.slug}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: service.title,
+          description: service.description,
+          provider: { "@type": "Organization", name: "Brandford Construction" },
+          url: `/services/${service.slug}`,
+        }}
+      />
       <Layout>
         <PageBanner title={service.title} breadcrumb={service.title} parent={{ label: "Services", href: "/services" }} />
         <section className="py-12 sm:py-16 md:py-24 bg-background overflow-hidden">
