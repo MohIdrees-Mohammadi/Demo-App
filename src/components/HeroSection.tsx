@@ -53,8 +53,6 @@ const HeroSection = () => {
             {get("home.hero.title_line1", "Engineering.")}
             <br />
             {get("home.hero.title_line2", "Construction.")}
-            <br />
-            <span className="text-primary">{get("home.hero.title_line3", "")}</span>
           </motion.h1>
 
           <motion.div
