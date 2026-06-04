@@ -121,7 +121,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        {/* <div className="border-t border-primary-foreground/10 mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[11px] sm:text-xs text-primary-foreground/35">{copyright}</p>
           <Link
             to="/admin"
@@ -129,7 +129,7 @@ const Footer = () => {
           >
             Admin
           </Link>
-        </div>
+        </div> */}
 
         <div className="mt-4 pt-4 border-t border-primary-foreground/5 text-center">
           <p className="text-[11px] sm:text-xs text-primary-foreground/40">
